@@ -1,19 +1,19 @@
 package com.bharathkalyans.notesapp.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface NotesDao {
+interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertNote(note: Note)
+    suspend fun insertNote(note: Note)
 
     @Delete
-    fun deleteNote()
+    suspend fun deleteNote()
 
     @Query("SELECT * FROM NOTES_TABLE ORDER BY id ASC")
-    fun getAllNotes(): List<Note>
-
+    fun getAllNotes(): LiveData<List<Note>>
 
 
 }
